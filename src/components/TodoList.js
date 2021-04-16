@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTodos } from "../api";
+import { deleteTodo, getTodos } from "../api";
 
 function TodoList() {
 	const [items, setItems] = useState([]);
@@ -21,7 +21,16 @@ function TodoList() {
 		fetchItems();
 	}, []);
 
-	console.log(items);
+	const handleDelete = async (id) => {
+		// console.log(id);
+		await deleteTodo(id);
+
+		let todos = await getTodos();
+
+		setItems(todos);
+	};
+
+	// console.log(items);
 	return (
 		<div className="container">
 			<div className="mt-3">
@@ -39,6 +48,10 @@ function TodoList() {
 								<td>{item.text}</td>
 								<td>
 									<Link to={`/edit/${item._id}`}>Edit</Link>
+									<i
+										onClick={() => handleDelete(item._id)}
+										className="fas fa-trash"
+									></i>
 								</td>
 							</tr>
 						))}
