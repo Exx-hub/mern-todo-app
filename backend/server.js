@@ -61,14 +61,14 @@ app.post("/create", (req, res) => {
 
 // GET SPECIFIC TODO ITEM
 app.get("/todos/:id", (req, res) => {
-	console.log("retrieving all items!");
+	console.log("retrieving one item!");
 	const id = req.params.id;
 	Todo.findById(id, (err, foundItem) => {
 		res.json(foundItem);
 	});
 });
 
-// EDIT TODO ENDPOINT USING POST
+// EDIT TODO ENDPOINT USING POST -- i think not recommended
 // app.post("/todos/:id", (req, res) => {
 // 	const id = req.params.id;
 // 	Todo.findById(id, (err, foundTodo) => {

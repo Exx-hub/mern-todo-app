@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { deleteTodo, getTodos } from "../api";
+import { deleteTodo, getTodos, toggleStatus } from "../api";
 
 function TodoList() {
 	const [items, setItems] = useState([]);
+	const [undone, setUndone] = useState(true);
 
 	useEffect(() => {
 		// fetch("http://localhost:4000/")
@@ -30,6 +31,13 @@ function TodoList() {
 		setItems(todos);
 	};
 
+	const handleToggle = async (id, status) => {
+		await toggleStatus(id, status);
+
+		let todos = await getTodos();
+		setItems(todos);
+	};
+
 	// console.log(items);
 	return (
 		<div className="container">
@@ -45,7 +53,12 @@ function TodoList() {
 					<tbody>
 						{items.map((item) => (
 							<tr key={item._id}>
-								<td>{item.text}</td>
+								<td
+									className={item.done ? "item toggled" : "item"}
+									onClick={() => handleToggle(item._id, item.done)}
+								>
+									{item.text}
+								</td>
 								<td>
 									<Link to={`/edit/${item._id}`}>Edit</Link>
 									<i

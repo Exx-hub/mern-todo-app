@@ -24,12 +24,23 @@ export const editTodo = (todo, id) => {
 			Accept: "application/json",
 			"Content-type": "application/json",
 		},
-		body: JSON.stringify(todo),
+		body: JSON.stringify({ text: todo.text }),
 	});
 };
 
 export const deleteTodo = (id) => {
 	return fetch(`http://localhost:4000/todos/${id}`, {
 		method: "DELETE",
+	});
+};
+
+export const toggleStatus = (id, status) => {
+	return fetch(`http://localhost:4000/todos/${id}`, {
+		method: "PUT",
+		headers: {
+			Accept: "application/json",
+			"Content-type": "application/json",
+		},
+		body: JSON.stringify({ done: !status }),
 	});
 };

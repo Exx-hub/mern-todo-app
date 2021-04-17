@@ -13,3 +13,9 @@ body {
 	cursor: pointer;
 	color: rgb(73, 73, 73);
 }
+.item {
+	cursor: pointer;
+}
+.toggled {
+	text-decoration: line-through;
+}

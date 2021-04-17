@@ -20,6 +20,7 @@ function EditTodo() {
 		alert(JSON.stringify(data));
 		await editTodo(data, match.params.id);
 		history.push("/");
+		// console.log(data);
 	};
 
 	return todo ? (
